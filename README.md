@@ -17,9 +17,12 @@ npm start
 ___
 ### Webhook Creation
 - Create text channel on your Discord server.
+
 ![Screenshot](https://i.imgur.com/iVO3aYm.png)
 - Open channel settings and create webhook.
+
 ![Screenshot](https://i.imgur.com/c6PGThG.png)
 - Copy **webhook URL**.
+
 ![Screenshot](https://i.imgur.com/rTdUSZO.png)
 ___
