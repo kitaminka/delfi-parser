@@ -6,8 +6,21 @@ require('dotenv').config();
 
 const webhookClient = new Discord.WebhookClient({ url: process.env.WEBHOOK_ULR });
 
+let previousLinks = [];
+
+fetch('https://rus.delfi.lv/news/novosti/', {
+    method: 'GET'
+}).then(res => res.text()).then((mainPage) => {
+    const mainPageHTML = HTMLParser.parse(mainPage);
+    const linkElements = mainPageHTML.querySelectorAll('div#ajax-headlines>div.row>div.mb-4>a');
+    for (const link of linkElements) {
+        previousLinks.push(link.attrs.href);
+    }
+});
+
 setInterval(async () => {
     console.log('Parsing news...');
+
     const mainPage = await fetch('https://rus.delfi.lv/news/novosti/', {
         method: 'GET'
     }).then(res => res.text());
@@ -20,21 +33,14 @@ setInterval(async () => {
         const link = links[i];
         const image = images[i];
 
-        const newsPage = await fetch(link.attrs.href, {
-            method: 'GET'
-        }).then(res => res.text());
-
-        const newsPageHTML = HTMLParser.parse(newsPage);
-
-        const time = newsPageHTML.querySelector('time.d-block.text-pale-sky.text-size-3.mb-2');
-        const date = new Date(time.attrs.datetime);
-        const now = new Date();
-
-        if (now.valueOf() - date.valueOf() < 300000) {
-
+        if (!previousLinks.includes(link.attrs.href)) {
             const titleText = HTMLToText.convert(image.attrs.alt, {
                 wordwrap: 130
             });
+            const newsPage = await fetch(link.attrs.href, {
+                method: 'GET'
+            }).then(res => res.text());
+            const newsPageHTML = HTMLParser.parse(newsPage);
             const description = newsPageHTML.querySelector('p.font-weight-bold');
             const descriptionText = HTMLToText.convert(description.innerHTML, {
                 wordwrap: 130,
@@ -59,5 +65,9 @@ setInterval(async () => {
             });
             console.log(`Sent: ${link.attrs.href}`);
         }
+    }
+    previousLinks = [];
+    for (const link of links) {
+        previousLinks.push(link.attrs.href);
     }
 }, 300000);
