@@ -7,6 +7,7 @@ require('dotenv').config();
 const webhookClient = new Discord.WebhookClient({ url: process.env.WEBHOOK_ULR });
 
 setInterval(async () => {
+    console.log('Parsing news...');
     const mainPage = await fetch('https://rus.delfi.lv/news/novosti/', {
         method: 'GET'
     }).then(res => res.text());
@@ -56,6 +57,7 @@ setInterval(async () => {
             await webhookClient.send({
                 embeds:[embed]
             });
+            console.log(`Sent: ${link.attrs.href}`);
         }
     }
 }, 300000);
