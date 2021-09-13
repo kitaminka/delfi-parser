@@ -6,13 +6,13 @@ ___
 - Clone repository to your computer.
 - Open a console in the cloned repository.
 - To install dependencies, write the following command in the console:
-```console
-npm install
+```bash
+$ npm install
 ```
 - Create **.env** file and put your [**Discord URL webhook**](#webhook-creation) in this file. Example of **.env** file you can see in the file **.env.example**.
 - To start the program, write the following command in the console:
-```console
-npm start
+```bash
+$ npm start
 ```
 ___
 ### Webhook Creation
