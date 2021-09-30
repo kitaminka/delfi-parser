@@ -60,6 +60,7 @@ setInterval(async () => {
                 .setTitle(titleText)
                 .setDescription(descriptionText)
                 .setImage(image.attrs.src);
+
             await webhookClient.send({
                 embeds:[embed]
             });

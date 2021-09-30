@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ."
   },
-  "author": "Kitam",
+  "author": "Kitaminka",
   "license": "MIT",
   "keywords": ["parser", "discord-webhook", "news-parser"],
   "dependencies": {
