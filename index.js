@@ -14,7 +14,7 @@ fetch('https://rus.delfi.lv/news/novosti/', {
     const mainPageHTML = HTMLParser.parse(mainPage);
     const linkElements = mainPageHTML.querySelectorAll('div#ajax-headlines>div.row>div.mb-4>a');
     for (const link of linkElements) {
-        previousLinks.push(link.attrs.href);
+        previousLinks.push(link.attrs.href.split('?id=')[1]);
     }
 });
 
@@ -33,7 +33,7 @@ setInterval(async () => {
         const link = links[i];
         const image = images[i];
 
-        if (!previousLinks.includes(link.attrs.href)) {
+        if (!previousLinks.includes(link.attrs.href.split('?id=')[1])) {
             const titleText = HTMLToText.convert(image.attrs.alt, {
                 wordwrap: 130
             });
@@ -64,11 +64,11 @@ setInterval(async () => {
             await webhookClient.send({
                 embeds:[embed]
             });
-            console.log(`Sent: ${link.attrs.href}`);
+            console.log(`Sent: ${titleText}`);
         }
     }
     previousLinks = [];
     for (const link of links) {
-        previousLinks.push(link.attrs.href);
+        previousLinks.push(link.attrs.href.split('?id=')[1]);
     }
 }, 300000);
