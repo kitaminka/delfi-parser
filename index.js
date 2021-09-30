@@ -71,4 +71,4 @@ setInterval(async () => {
     for (const link of links) {
         previousLinks.push(link.attrs.href.split('?id=')[1]);
     }
-}, 300000);
+}, process.env.INTERMAL_MS);
