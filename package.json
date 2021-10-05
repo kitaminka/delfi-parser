@@ -8,13 +8,20 @@
   },
   "author": "Kitaminka",
   "license": "MIT",
-  "keywords": ["parser", "discord-webhook", "news-parser"],
+  "keywords": [
+    "parser",
+    "discord-webhook",
+    "news-parser"
+  ],
   "dependencies": {
     "discord.js": "^13.0.1",
     "dotenv": "^10.0.0",
     "html-to-text": "^8.0.0",
     "node-fetch": "^2.6.1",
     "node-html-parser": "^4.1.3"
+  },
+  "engines": {
+    "node": "16.x"
   },
   "repository": {
     "type": "git",
