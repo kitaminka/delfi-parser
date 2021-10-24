@@ -8,7 +8,7 @@ ___
 ```bash
 npm install
 ```
-- Create **.env** file and put your [**Discord URL webhook**](#webhook-creation) in this file. Example of **.env** file you can see in the file **.env.example**.
+- Create **.env** file and put your [**Discord webhook URL**](#webhook-creation) in this file. Example of **.env** file you can see in the file **.env.example**.
 - To start the program, use the following command:
 ```bash
 npm start
