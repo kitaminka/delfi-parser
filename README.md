@@ -1,15 +1,17 @@
 # DelfiParser
-
 [**Delfi**](https://rus.delfi.lv/) news parser with sending them to **Discord** using **webhook**.
 ___
 ### Installation and launching
-- Clone repository to your computer.
-- To install dependencies, use the following command:
+- Clone the repository:
+```bash
+git clone https://github.com/Kitaminka/DelfiParser.git
+```
+- Install dependencies:
 ```bash
 npm install
 ```
 - Create **.env** file and put your [**Discord webhook URL**](#webhook-creation) in this file. Example of **.env** file you can see in the file **.env.example**.
-- To start the program, use the following command:
+- Start the program:
 ```bash
 npm start
 ```
