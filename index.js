@@ -64,7 +64,7 @@ setInterval(async () => {
             await webhookClient.send({
                 embeds:[embed]
             });
-            console.log(`Sent: ${titleText}`);
+            console.log(`Sent:\nID: ${link.attrs.href.split('?id=')[1]}\nTitle: ${titleText}\nLink: ${link.attrs.href}`);
         }
     }
     previousLinks = [];
