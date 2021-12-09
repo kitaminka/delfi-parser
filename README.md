@@ -1,5 +1,5 @@
 # DelfiParser
-[**Delfi**](https://rus.delfi.lv/) news parser with sending them to **Discord** using **webhook**.
+Latvian [**Delfi**](https://rus.delfi.lv/) news parser with sending them to **Discord** using **webhook**.
 ___
 ### Installation and launching
 - Clone the repository:
