@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ."
   },
-  "author": "Kitaminka",
+  "author": "kitaminka",
   "license": "MIT",
   "keywords": [
     "parser",
