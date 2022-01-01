@@ -8,12 +8,12 @@ git clone https://github.com/Kitaminka/DelfiParser.git
 ```
 - Install dependencies:
 ```bash
-npm install
+yarn
 ```
 - Create **.env** file and put your [**Discord webhook URL**](#webhook-creation) in this file. Example of **.env** file you can see in the file **.env.example**.
 - Start the program:
 ```bash
-npm start
+yarn start
 ```
 ___
 ### Webhook Creation
