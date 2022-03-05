@@ -1,8 +1,8 @@
-const Discord = require('discord.js');
-const fetch = require('node-fetch');
-const HTMLParser = require('node-html-parser');
-const HTMLToText = require('html-to-text');
-require('dotenv').config();
+import Discord from 'discord.js';
+import fetch from 'node-fetch';
+import HTMLParser from 'node-html-parser';
+import HTMLToText from 'html-to-text';
+import 'dotenv/config'
 
 const webhookClient = new Discord.WebhookClient({ url: process.env.WEBHOOK_ULR });
 
@@ -64,11 +64,12 @@ setInterval(async () => {
             await webhookClient.send({
                 embeds:[embed]
             });
-            console.log(`-------------------------------------------------\nSent:\nID: ${link.attrs.href.split('?id=')[1]}\nTitle: ${titleText}\nLink: ${link.attrs.href}\n-------------------------------------------------`);
+            console.log(`Sent:\nID: ${link.attrs.href.split('?id=')[1]}\nTitle: ${titleText}\nLink: ${link.attrs.href}`);
         }
     }
     previousLinks = [];
     for (const link of links) {
         previousLinks.push(link.attrs.href.split('?id=')[1]);
     }
+    console.log('Parsing finished!');
 }, process.env.INTERVAL_MS);

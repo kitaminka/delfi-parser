@@ -2,7 +2,7 @@
   "name": "delfi-parser",
   "version": "1.0.0",
   "description": "Delfi news parser with sending them to Discord using webhook",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
     "start": "node ."
   },
