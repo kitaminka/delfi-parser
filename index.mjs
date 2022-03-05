@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 import HTMLParser from 'node-html-parser';
 import HTMLToText from 'html-to-text';
 import 'dotenv/config'
+import { buildEmbed } from './embed.mjs';
 
 const webhookClient = new Discord.WebhookClient({ url: process.env.WEBHOOK_ULR });
 
@@ -34,7 +35,8 @@ setInterval(async () => {
         const image = images[i];
 
         if (!previousLinks.includes(link.attrs.href.split('?id=')[1])) {
-            const titleText = HTMLToText.convert(image.attrs.alt, {
+            const newsInfo = {link: link.attrs.href};
+            newsInfo.title = HTMLToText.convert(image.attrs.alt, {
                 wordwrap: 130
             });
             const newsPage = await fetch(link.attrs.href, {
@@ -42,7 +44,7 @@ setInterval(async () => {
             }).then(res => res.text());
             const newsPageHTML = HTMLParser.parse(newsPage);
             const description = newsPageHTML.querySelector('p.font-weight-bold');
-            const descriptionText = HTMLToText.convert(description.innerHTML, {
+            newsInfo.description = HTMLToText.convert(description.innerHTML, {
                 wordwrap: 130,
                 selectors: [
                     {
@@ -54,12 +56,14 @@ setInterval(async () => {
                 ]
             }).replaceAll('\n', ' ');
 
-            const embed = new Discord.MessageEmbed()
-                .setColor('#0062ff')
-                .setURL(link.attrs.href)
-                .setTitle(titleText)
-                .setDescription(descriptionText)
-                .setImage(image.attrs.src);
+            const embed = buildEmbed(newsInfo);
+
+            // const embed = new Discord.MessageEmbed()
+            //     .setColor('#0062ff')
+            //     .setURL(link.attrs.href)
+            //     .setTitle(titleText)
+            //     .setDescription(descriptionText)
+            //     .setImage(image.attrs.src);
 
             await webhookClient.send({
                 embeds:[embed]
