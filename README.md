@@ -15,7 +15,7 @@ yarn
 ```bash
 yarn start
 ```
-- You can customize the message by [**changing the config.json**](#message-customization) file.
+- You can [**customize the message**](#message-customization) by changing the **config.json** file.
 ___
 ### Message customization
 - Edit **config.json** file to customize message.
