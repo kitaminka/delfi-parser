@@ -23,7 +23,7 @@ async function createEmbed(newsInfo, messageConfig) {
 
     if (messageConfig.timestamp) embed.setTimestamp();
 
-    return embed
+    return embed;
 }
 
 async function generateMessageConfig(messageConfig, newsInfo) {
