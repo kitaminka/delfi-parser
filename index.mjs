@@ -3,19 +3,21 @@ import fetch from 'node-fetch';
 import HTMLParser from 'node-html-parser';
 import HTMLToText from 'html-to-text';
 import 'dotenv/config'
-import { buildEmbed } from './embed.mjs';
+import { createEmbed, generateMessageConfig } from './message.mjs';
+import config from './config.json' assert {type: 'json'};
 
 const webhookClient = new Discord.WebhookClient({ url: process.env.WEBHOOK_ULR });
 
-let previousLinks = [];
+let previousNewsIds = [];
 
 fetch('https://rus.delfi.lv/news/novosti/', {
     method: 'GET'
 }).then(res => res.text()).then((mainPage) => {
     const mainPageHTML = HTMLParser.parse(mainPage);
     const linkElements = mainPageHTML.querySelectorAll('div#ajax-headlines>div.row>div.mb-4>a');
-    for (const link of linkElements) {
-        previousLinks.push(link.attrs.href.split('?id=')[1]);
+
+    for (const linkElement of linkElements) {
+        previousNewsIds.push(linkElement.attrs.href.split('?id=')[1]);
     }
 });
 
@@ -27,25 +29,27 @@ setInterval(async () => {
     }).then(res => res.text());
 
     const mainPageHTML = HTMLParser.parse(mainPage);
-    const links = mainPageHTML.querySelectorAll('div#ajax-headlines>div.row>div.mb-4>a');
-    const images = mainPageHTML.querySelectorAll('.img-fluid.w-100.lazy-img.disable-lazy');
+    const linkElements = mainPageHTML.querySelectorAll('div#ajax-headlines>div.row>div.mb-4>a');
+    const imageElements = mainPageHTML.querySelectorAll('.img-fluid.w-100.lazy-img.disable-lazy');
 
     for (let i = 3; i >= 0; i--) {
-        const link = links[i];
-        const image = images[i];
+        const linkElement = linkElements[i];
+        const imageElement = imageElements[i];
 
-        if (!previousLinks.includes(link.attrs.href.split('?id=')[1])) {
-            const newsInfo = {link: link.attrs.href};
-            newsInfo.title = HTMLToText.convert(image.attrs.alt, {
-                wordwrap: 130
-            });
-            const newsPage = await fetch(link.attrs.href, {
+        if (!previousNewsIds.includes(linkElement.attrs.href.split('?id=')[1])) {
+            const newsInfo = {};
+
+            const newsPage = await fetch(linkElement.attrs.href, {
                 method: 'GET'
             }).then(res => res.text());
             const newsPageHTML = HTMLParser.parse(newsPage);
-            const description = newsPageHTML.querySelector('p.font-weight-bold');
-            newsInfo.description = HTMLToText.convert(description.innerHTML, {
-                wordwrap: 130,
+            const descriptionElement = newsPageHTML.querySelector('p.font-weight-bold');
+
+            newsInfo.title = HTMLToText.convert(imageElement.attrs.alt, {
+                wordwrap: false
+            });
+            newsInfo.description = HTMLToText.convert(descriptionElement.innerHTML, {
+                wordwrap: false,
                 selectors: [
                     {
                         selector: 'a',
@@ -54,26 +58,27 @@ setInterval(async () => {
                         }
                     }
                 ]
-            }).replaceAll('\n', ' ');
+            });
+            newsInfo.image = imageElement.attrs.src;
+            newsInfo.id = linkElement.attrs.href.split('?id=')[1];
+            newsInfo.link = linkElement.attrs.href;
 
-            const embed = buildEmbed(newsInfo);
-
-            // const embed = new Discord.MessageEmbed()
-            //     .setColor('#0062ff')
-            //     .setURL(link.attrs.href)
-            //     .setTitle(titleText)
-            //     .setDescription(descriptionText)
-            //     .setImage(image.attrs.src);
+            const messageConfig = await generateMessageConfig(config.message, newsInfo);
+            const embed = await createEmbed(newsInfo, messageConfig);
 
             await webhookClient.send({
+                username: config.webhook.username,
+                avatarURL: config.webhook.avatar,
+                content: messageConfig.content !== '' ? messageConfig.content : null,
                 embeds:[embed]
             });
-            console.log(`Sent:\nID: ${link.attrs.href.split('?id=')[1]}\nTitle: ${titleText}\nLink: ${link.attrs.href}`);
+
+            console.log(`News sent: ${newsInfo.title}`);
         }
     }
-    previousLinks = [];
-    for (const link of links) {
-        previousLinks.push(link.attrs.href.split('?id=')[1]);
+    previousNewsIds = [];
+    for (const linkElement of linkElements) {
+        previousNewsIds.push(linkElement.attrs.href.split('?id=')[1]);
     }
     console.log('Parsing finished!');
-}, process.env.INTERVAL_MS);
+}, config.parsingInterval);
