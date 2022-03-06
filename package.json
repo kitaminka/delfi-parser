@@ -1,10 +1,10 @@
 {
-  "name": "delfi-parser",
+  "username": "delfi-parser",
   "version": "1.0.0",
   "description": "Delfi news parser with sending them to Discord using webhook",
   "main": "index.mjs",
   "scripts": {
-    "start": "node ."
+    "start": "node --experimental-json-modules ."
   },
   "author": "kitaminka",
   "license": "MIT",

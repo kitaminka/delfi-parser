@@ -1,0 +1,28 @@
+{
+  "webhook": {
+    "avatar": "",
+    "username": ""
+  },
+  "message": {
+    "content": "",
+    "title": {
+      "text": "{{title}}",
+      "url": "{{link}}"
+    },
+    "author": {
+      "name": "Delfi",
+      "url": "https://rus.delfi.lv/",
+      "icon": "https://i.imgur.com/s5SDISG.png"
+    },
+    "color": "#0062ff",
+    "description": "{{description}}",
+    "thumbnail" : "",
+    "image": "{{image}}",
+    "timestamp": true,
+    "footer": {
+      "text": "",
+      "icon": ""
+    }
+  },
+  "parsingInterval": 300000
+}

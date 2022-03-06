@@ -10,11 +10,26 @@ git clone https://github.com/Kitaminka/DelfiParser.git
 ```bash
 yarn
 ```
-- Create **.env** file and put your [**Discord webhook URL**](#webhook-creation) in this file. Example of **.env** file you can see in the file **.env.example**.
+- Create **.env** file and put your [**Discord webhook URL**](#webhook-creation) in this file. Example of **.env** file you can see in the **.env.example** file.
 - Start the program:
 ```bash
 yarn start
 ```
+- You can [**customize the message**](#message-customization) by changing the **config.json** file.
+___
+### Message customization
+- Edit **config.json** file to customize message.
+
+![Screenshot](https://i.imgur.com/MeUNPsz.png)
+
+- In any of the settings, you can use the following variables:
+
+| Variable            | Description            | Example value                                                                                                                                                                                                                                                       |
+|---------------------|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **{{title}}**       | News title             | Состоятся авиарейсы по возвращению жителей Латвии из Египта                                                                                                                                                                                                         |
+| **{{description}}** | News description       | Сегодня состоятся согласованные Министерством сообщения и Министерством иностранных дел авиарейсы из Египта, чтобы на родину могли вернуться латвийцы, которые путешествовали рейсом, организованным подпавшим под антироссийские санкции туроператором TT Baltics. |
+| **{{image}}**       | Link to the news image | https://g4.delphi.lv/images/pix/676x385/dSop4_NZRlQ/lidmasina-lidmasinas-53968257.jpg                                                                                                                                                                               |
+| **{{link}}**        | Link to the news page  | https://rus.delfi.lv/news/daily/latvia/sostoyatsya-aviarejsy-po-vozvrascheniyu-zhitelej-latvii-iz-egipta.d?id=54123886                                                                                                                                              |
 ___
 ### Webhook Creation
 - Create text channel on your Discord server.
