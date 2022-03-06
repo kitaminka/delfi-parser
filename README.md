@@ -18,7 +18,7 @@ yarn start
 - You can [**customize the message**](#message-customization) by changing the **config.json** file.
 ___
 ### Message customization
-- Edit **config.json** file to customize message.
+- Edit **config.json** file to customize the message.
 
 ![Screenshot](https://i.imgur.com/MeUNPsz.png)
 
