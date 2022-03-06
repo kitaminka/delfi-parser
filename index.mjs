@@ -10,16 +10,16 @@ const webhookClient = new Discord.WebhookClient({ url: process.env.WEBHOOK_ULR }
 
 let previousNewsIds = [];
 
-// fetch('https://rus.delfi.lv/news/novosti/', {
-//     method: 'GET'
-// }).then(res => res.text()).then((mainPage) => {
-//     const mainPageHTML = HTMLParser.parse(mainPage);
-//     const linkElements = mainPageHTML.querySelectorAll('div#ajax-headlines>div.row>div.mb-4>a');
-//
-//     for (const linkElement of linkElements) {
-//         previousNewsIds.push(linkElement.attrs.href.split('?id=')[1]);
-//     }
-// });
+fetch('https://rus.delfi.lv/news/novosti/', {
+    method: 'GET'
+}).then(res => res.text()).then((mainPage) => {
+    const mainPageHTML = HTMLParser.parse(mainPage);
+    const linkElements = mainPageHTML.querySelectorAll('div#ajax-headlines>div.row>div.mb-4>a');
+
+    for (const linkElement of linkElements) {
+        previousNewsIds.push(linkElement.attrs.href.split('?id=')[1]);
+    }
+});
 
 setInterval(async () => {
     console.log('Parsing news...');
