@@ -6,7 +6,7 @@ import 'dotenv/config'
 import { createEmbed, generateMessageConfig } from './message.mjs';
 import config from './config.json' assert {type: 'json'};
 
-const webhookClient = new Discord.WebhookClient({ url: process.env.WEBHOOK_ULR });
+const webhookClient = new Discord.WebhookClient({ url: config.webhook.url });
 
 let previousNewsIds = [];
 

@@ -1,21 +1,20 @@
 # delfi-parser
 Russian [**Delfi**](https://rus.delfi.lv/) news parser with sending them to **Discord** using **webhook**.
 ___
-### Installation and launching
+### Installation
 - Clone the repository:
 ```bash
-git clone https://github.com/Kitaminka/DelfiParser.git
+git clone https://github.com/kitaminka/delfi-parser.git
 ```
 - Install dependencies:
 ```bash
 yarn
 ```
-- Create **.env** file and put your [**Discord webhook URL**](#webhook-creation) in this file. Example of **.env** file you can see in the **.env.example** file.
+- [**Edit config.json file**](#message-customization) and put your [**Discord webhook URL**](#webhook-creation) in this file.
 - Start the program:
 ```bash
 yarn start
 ```
-- You can [**customize the message**](#message-customization) by changing the **config.json** file.
 ___
 ### Message customization
 - Edit **config.json** file to customize the message.
