@@ -22,10 +22,5 @@
   },
   "engines": {
     "node": ">=17"
-  },
-  "repository": "git+https://github.com/Kitaminka/DelfiParser.git",
-  "bugs": {
-    "url": "https://github.com/Kitaminka/DelfiParser/issues"
-  },
-  "homepage": "https://github.com/Kitaminka/DelfiParser#readme"
+  }
 }
