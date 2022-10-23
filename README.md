@@ -8,7 +8,7 @@ git clone https://github.com/kitaminka/delfi-parser.git
 ```
 - Install dependencies:
 ```bash
-yarn
+yarn install
 ```
 - [**Edit config.json file**](#message-customization) and put your [**Discord webhook URL**](#webhook-creation) in this file.
 - Start the program:
