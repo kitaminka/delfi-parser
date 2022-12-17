@@ -66,14 +66,17 @@ setInterval(async () => {
             const messageConfig = await generateMessageConfig(config.message, newsInfo);
             const embed = await createEmbed(newsInfo, messageConfig);
 
-            await webhookClient.send({
-                username: config.webhook.username,
-                avatarURL: config.webhook.avatar,
-                content: messageConfig.content !== '' ? messageConfig.content : null,
-                embeds:[embed]
-            });
-
-            console.log(`News sent: ${newsInfo.title}`);
+            try {
+                await webhookClient.send({
+                    username: config.webhook.username,
+                    avatarURL: config.webhook.avatar,
+                    content: messageConfig.content !== '' ? messageConfig.content : null,
+                    embeds:[embed]
+                });
+                console.log(`News sent: ${newsInfo.title}`);
+            } catch {
+                console.error('Error sending message. Maybe the URL of the webhook is invalid.');
+            }
         }
     }
     previousNewsIds = [];

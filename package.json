@@ -8,19 +8,14 @@
   },
   "author": "kitaminka",
   "license": "MIT",
-  "keywords": [
-    "parser",
-    "discord-webhook",
-    "news-parser"
-  ],
   "dependencies": {
-    "discord.js": "14.0.3",
-    "dotenv": "16.0.1",
-    "html-to-text": "8.2.0",
-    "node-fetch": "3.2.9",
-    "node-html-parser": "5.3.3"
+    "discord.js": "^14.0.3",
+    "dotenv": "^16.0.1",
+    "html-to-text": "^8.2.0",
+    "node-fetch": "^3.2.9",
+    "node-html-parser": "^5.3.3"
   },
   "engines": {
-    "node": ">=17"
+    "node": ">=16"
   }
 }
